@@ -70,7 +70,7 @@ uint8_t lastkeycodestatus; // Keydown or keyrelease status for the last keycode 
 //unsigned char keyboardleddata; // Needed for keyboard reading handle code
 
 
-bool USB_AVAILABLE = false;
+//bool USB_AVAILABLE = false;
 
 
 const uint8_t DB9_1_TOTALPINS = sizeof(DB9_1_PINS);
@@ -82,12 +82,12 @@ const char DB9_1_MAP_PS2[4][12] = { // Keycode PS2 maps for the first controller
 {PS2dev::SEVEN, PS2dev::SIX, PS2dev::FIVE, PS2dev::EIGHT, PS2dev::ZERO, PS2dev::ENTER, PS2dev::ESCAPE, PS2dev::F1, PS2dev::Z, PS2dev::Y, PS2dev::X, PS2dev::M}
 };
 
-const char DB9_1_MAP_USB[4][12] = { // Keycode USB maps for the first controller
-{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, KEY_RIGHT_ALT, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'},
-{'q', 'a', 'o', 'p', 'm', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'c'},
-{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, '0', KEY_ESC, KEY_F5, 'z', 'y', 'x', 'm'},
-{'7', '6', '5', '8', '0', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'}
-};
+// const char DB9_1_MAP_USB[4][12] = { // Keycode USB maps for the first controller
+// {KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, KEY_RIGHT_ALT, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'},
+// {'q', 'a', 'o', 'p', 'm', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'c'},
+// {KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, '0', KEY_ESC, KEY_F5, 'z', 'y', 'x', 'm'},
+// {'7', '6', '5', '8', '0', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'}
+// };
 
 uint8_t DB9_1_MAP_ACTIVE = 0;
 uint8_t DB9_1_PRESSCOUNT[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -103,12 +103,12 @@ const char DB9_2_MAP_PS2[4][12] = { // Keycode PS2 maps for the second controlle
 {PS2dev::SEVEN, PS2dev::SIX, PS2dev::FIVE, PS2dev::EIGHT, PS2dev::ZERO, PS2dev::ENTER, PS2dev::ESCAPE, PS2dev::F1, PS2dev::Z, PS2dev::Y, PS2dev::X, PS2dev::M}
 };
 
-const char DB9_2_MAP_USB[4][12] = { // Keycode USB maps for the first controller
-{'q', 'a', 'o', 'p', 'm', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'c'},
-{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, KEY_RIGHT_ALT, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'},
-{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, '0', KEY_ESC, KEY_F5, 'z', 'y', 'x', 'm'},
-{'7', '6', '5', '8', '0', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'}
-};
+//const char DB9_2_MAP_USB[4][12] = { // Keycode USB maps for the first controller
+//{'q', 'a', 'o', 'p', 'm', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'c'},
+//{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, KEY_RIGHT_ALT, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'},
+//{KEY_UP_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_RIGHT_ARROW, KEY_RETURN, '0', KEY_ESC, KEY_F5, 'z', 'y', 'x', 'm'},
+//{'7', '6', '5', '8', '0', KEY_RETURN, KEY_ESC, KEY_F12, 'z', 'y', 'x', 'm'}
+//};
 
 uint8_t DB9_2_MAP_ACTIVE = 0;
 uint8_t DB9_2_PRESSCOUNT[12] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -143,20 +143,20 @@ void setup() {
 
   
   // USB keyboard initialization
-  uint8_t USB_tries = 6;
-  while (USB_AVAILABLE == false && USB_tries > 0) {
-    USB_tries--;
-    delay(500); // Waits 1/2 second for USB host assignment request check
-    if (UDADDR & _BV(ADDEN)) {
-      Keyboard.begin(); // USB keyboard init (notice the K in uppercase)
-      USB_AVAILABLE = true;
+//  uint8_t USB_tries = 6;
+//  while (USB_AVAILABLE == false && USB_tries > 0) {
+//    USB_tries--;
+//    delay(500); // Waits 1/2 second for USB host assignment request check
+//    if (UDADDR & _BV(ADDEN)) {
+//      Keyboard.begin(); // USB keyboard init (notice the K in uppercase)
+//      USB_AVAILABLE = true;
       /*
       #ifdef BLUEPILL_BOARD
       digitalWrite(LED_ONBOARD_2, LOW);
       #endif
       */
-    }
-  }
+//    }
+//  }
   
   
   // Joystick in DB9 port 1 initialization
@@ -252,8 +252,10 @@ void loop() {
   /*
   readPS2handle(keyboardleddata);
   */
-  joystickProcess(DB9_1_PINS, DB9_1_TOTALPINS, DB9_1_SELECT, DB9_1_STATUS, DB9_1_PRESSCOUNT, DB9_1_MAP_PS2, DB9_1_MAP_USB, DB9_1_MAP_ACTIVE, 1);
-  joystickProcess(DB9_2_PINS, DB9_2_TOTALPINS, DB9_2_SELECT, DB9_2_STATUS, DB9_2_PRESSCOUNT, DB9_2_MAP_PS2, DB9_2_MAP_USB, DB9_2_MAP_ACTIVE, 2);
+//  joystickProcess(DB9_1_PINS, DB9_1_TOTALPINS, DB9_1_SELECT, DB9_1_STATUS, DB9_1_PRESSCOUNT, DB9_1_MAP_PS2, DB9_1_MAP_USB, DB9_1_MAP_ACTIVE, 1);
+//  joystickProcess(DB9_2_PINS, DB9_2_TOTALPINS, DB9_2_SELECT, DB9_2_STATUS, DB9_2_PRESSCOUNT, DB9_2_MAP_PS2, DB9_2_MAP_USB, DB9_2_MAP_ACTIVE, 2);
+  joystickProcess(DB9_1_PINS, DB9_1_TOTALPINS, DB9_1_SELECT, DB9_1_STATUS, DB9_1_PRESSCOUNT, DB9_1_MAP_PS2, DB9_1_MAP_ACTIVE, 1);
+  joystickProcess(DB9_2_PINS, DB9_2_TOTALPINS, DB9_2_SELECT, DB9_2_STATUS, DB9_2_PRESSCOUNT, DB9_2_MAP_PS2, DB9_2_MAP_ACTIVE, 2);
   
 }
 
@@ -307,7 +309,8 @@ uint8_t readPS2handle(unsigned char &leddata) {
 
 
 
-void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTALPINS, const uint8_t JOYSTICK_SELECT, uint8_t JOYSTICK_STATUS[12], uint8_t JOYSTICK_PRESSCOUNT[12], const char JOYSTICK_MAP_PS2[4][12], const char JOYSTICK_MAP_USB[4][12], uint8_t JOYSTICK_MAP_ACTIVE, uint8_t JOYSTICK_INDEX) {
+//void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTALPINS, const uint8_t JOYSTICK_SELECT, uint8_t JOYSTICK_STATUS[12], uint8_t JOYSTICK_PRESSCOUNT[12], const char JOYSTICK_MAP_PS2[4][12], const char JOYSTICK_MAP_USB[4][12], uint8_t JOYSTICK_MAP_ACTIVE, uint8_t JOYSTICK_INDEX) {
+void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTALPINS, const uint8_t JOYSTICK_SELECT, uint8_t JOYSTICK_STATUS[12], uint8_t JOYSTICK_PRESSCOUNT[12], const char JOYSTICK_MAP_PS2[4][12], uint8_t JOYSTICK_MAP_ACTIVE, uint8_t JOYSTICK_INDEX) {
 
   JOYSTICK_3BUTTON = false;
   
@@ -329,8 +332,8 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
           DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
           
           sendPS2keypress(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i+2]);
-          if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+2]); }
-          
+//          if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+2]); }          
+
           #ifdef BLUEPILL_BOARD
           if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, LOW); }
           if (JOYSTICK_INDEX == 2) { digitalWrite(LED_ONBOARD_2, LOW); }
@@ -351,7 +354,7 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
           DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
           
           sendPS2keyrelease(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i+2]);
-          if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+2]); }
+//          if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+2]); }
           
           #ifdef BLUEPILL_BOARD
           if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, HIGH); }
@@ -375,7 +378,7 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
         DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
         
         sendPS2keypress(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i]);
-        if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i]); }
+//        if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i]); }
         
         #ifdef BLUEPILL_BOARD
         if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, LOW); }
@@ -397,7 +400,7 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
         DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
         
         sendPS2keyrelease(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i]);
-        if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i]); }
+//        if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i]); }
         
         #ifdef BLUEPILL_BOARD
         if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, HIGH); }
@@ -426,7 +429,7 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
             DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
             
             sendPS2keypress(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i+8]);
-            if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+8]); }
+//            if (USB_AVAILABLE == true) { Keyboard.press(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+8]); }
             
             #ifdef BLUEPILL_BOARD
             if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, LOW); }
@@ -441,7 +444,7 @@ void joystickProcess(const uint8_t JOYSTICK_PINS[6], const uint8_t JOYSTICK_TOTA
             DB9_CYCLES_WAITCOUNT = DB9_CYCLES_WAIT;
             
             sendPS2keyrelease(JOYSTICK_MAP_PS2[JOYSTICK_MAP_ACTIVE][i+8]);
-            if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+8]); }
+//            if (USB_AVAILABLE == true) { Keyboard.release(JOYSTICK_MAP_USB[JOYSTICK_MAP_ACTIVE][i+8]); }
             
             #ifdef BLUEPILL_BOARD
             if (JOYSTICK_INDEX == 1) { digitalWrite(LED_ONBOARD_1, HIGH); }
