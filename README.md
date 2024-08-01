@@ -1,3 +1,5 @@
+Forked from https://github.com/dacarsoft/DB9_2_Keyboard to use without USB even in Arduino Uno
+
 # DB9_2_Keyboard
 Converts DB9 joysticks button presses to keyboard scancodes
 
@@ -47,30 +49,30 @@ CURSOR UP, CURSOR DOWN, CURSOR LEFT, CURSOR RIGHT, ZERO, ENTER, ESCAPE, F5, Z, Y
 SEVEN, SIX, FIVE, EIGHT, ZERO, ENTER, ESCAPE, F1, Z, Y, X, M
 
 
-
+/****************************************************
 **DB9 PORT 2 (USB):**
-
-Q, A, O, P, M, ENTER, ESCAPE, F12, Z, Y, X, C
-
-CURSOR UP, CURSOR DOWN, CURSOR LEFT, CURSOR RIGHT, ENTER, RIGHT ALT, ESCAPE, F12, Z, Y, X, M
-
-CURSOR UP, CURSOR DOWN, CURSOR LEFT, CURSOR RIGHT, ENTER, ZERO, ESCAPE, F5, Z, Y, X, M
-
-SEVEN, SIX, FIVE, EIGHT, ZERO, ENTER, ESCAPE, F12, Z, Y, X, M
-
-
-
-The keymaps can be changed by pressing a direction button (up, down, left, right) while the board is plugged or powered up.
-
-
-
+*
+* Q, A, O, P, M, ENTER, ESCAPE, F12, Z, Y, X, C
+* 
+* CURSOR UP, CURSOR DOWN, CURSOR LEFT, CURSOR RIGHT, ENTER, RIGHT ALT, ESCAPE, F12, Z, Y, X, M
+* 
+* CURSOR UP, CURSOR DOWN, CURSOR LEFT, CURSOR RIGHT, ENTER, ZERO, ESCAPE, F5, Z, Y, X, M
+*
+* SEVEN, SIX, FIVE, EIGHT, ZERO, ENTER, ESCAPE, F12, Z, Y, X, M
+*
+*
+*
+* The keymaps can be changed by pressing a direction button (up, down, left, right) while the board is plugged or powered up.
+*
+*
+*
 **ROADMAP:**
-
--Code for a little OLED screen connection, showing menu and information is development, the aim is to allow the use of an onscreen virtual keyboard, and also show the current map in use for each keyboard port.
-
--The scancodes map will be user-defined and recorded from the own joystick board.
-
-
+*
+* -Code for a little OLED screen connection, showing menu and information is development, the aim is to allow the use of an onscreen virtual keyboard, and also show the * * * current map in use for each keyboard port.
+*
+* -The scancodes map will be user-defined and recorded from the own joystick board.
+*
+******************************************************************/
 **FLASH INSTRUCTIONS:**
 
 Tha Arduino IDE and tools can be used, but to flash easily the firmware in the ATmega 32U4 this DIY keyboard's updater program can be used also by using the proper HEX file available under the build/<board_model> folder of the project: 
